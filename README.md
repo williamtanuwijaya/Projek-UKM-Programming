@@ -2,4 +2,4 @@
 
 Pada project ini terdapat 2 tim yaitu tim **frontend** atau **Mobile Developer** dan tim **Backend**.
 
-Untuk Mobilenya sendiri pakai Flutter dan untuk Backendnya pakai ExpressJS.
+Untuk Mobilenya sendiri pakai **Flutter** dan untuk Backendnya pakai **ExpressJS**.
