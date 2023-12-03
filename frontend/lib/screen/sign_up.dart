@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ukm_project/screen/sign_in.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -193,14 +194,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        const Text('Sudah Punya Akun?'),
-                                        TextButton(
-                                          onPressed: () {},
-                                          style: ButtonStyle(
-                                              padding:
-                                                  MaterialStateProperty.all(
-                                                      EdgeInsets.zero)),
-                                          child: const Text('Masuk'),
+                                        const Text('Sudah Punya Akun? '),
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignInScreen(),
+                                                ));
+                                          },
+                                          child: Text(
+                                            'Masuk',
+                                            style: TextStyle(
+                                              color: Color(0xFF0B5BA5),
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
