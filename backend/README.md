@@ -3,6 +3,8 @@
 
 Kami menggunakan backendnya yaitu ExpressJS yang bertujuan untuk membuat RESTFUL API yang akan dikirimkan ke tim **ANDROID**.
 
+## Install
+- [NodeJS](https://nodejs.org/en)
 
 
 
@@ -19,6 +21,7 @@ Kami menggunakan backendnya yaitu ExpressJS yang bertujuan untuk membuat RESTFUL
 ## Documentation
 
 - [NodeJS](https://nodejs.org/en)
+- [ExpressJS](https://expressjs.com/)
 
 
 ## Run Locally
@@ -39,4 +42,3 @@ Start the server
 ## Authors
 
 - [William Tanuwijaya](https://www.github.com/williamtanuwijaya)
-
