@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFFCCE3FD),
+                    color: const Color(0xFFCCE3FD),
                     boxShadow: const [
                       BoxShadow(
                         color: Colors.grey,
@@ -175,9 +175,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       InkWell(
                         onTap: () {},
-                        child: SizedBox(
+                        child: const SizedBox(
                           width: 90,
-                          child: const Column(
+                          child: Column(
                             children: [
                               Icon(Icons.castle),
                               SizedBox(height: 8),
@@ -188,9 +188,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       InkWell(
                         onTap: () {},
-                        child: SizedBox(
+                        child: const SizedBox(
                           width: 90,
-                          child: const Column(
+                          child: Column(
                             children: [
                               Icon(Icons.beach_access),
                               SizedBox(height: 8),
@@ -201,9 +201,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       InkWell(
                         onTap: () {},
-                        child: SizedBox(
+                        child: const SizedBox(
                           width: 90,
-                          child: const Column(
+                          child: Column(
                             children: [
                               Icon(Icons.house),
                               SizedBox(height: 8),
@@ -214,9 +214,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       InkWell(
                         onTap: () {},
-                        child: SizedBox(
+                        child: const SizedBox(
                           width: 90,
-                          child: const Column(
+                          child: Column(
                             children: [
                               Icon(Icons.bed),
                               SizedBox(height: 8),
@@ -227,9 +227,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       InkWell(
                         onTap: () {},
-                        child: SizedBox(
+                        child: const SizedBox(
                           width: 90,
-                          child: const Column(
+                          child: Column(
                             children: [
                               Icon(Icons.place),
                               SizedBox(height: 8),
