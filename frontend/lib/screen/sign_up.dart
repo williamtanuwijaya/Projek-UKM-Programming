@@ -18,6 +18,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool isAgreed = false;
 
+  void _signUp() {
+    Navigator.pushNamed(context, '/home');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -173,7 +177,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                     Center(
                                       child: ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          _signUp();
+                                        },
                                         style: ButtonStyle(
                                           fixedSize: MaterialStateProperty.all(
                                             const Size(340, 60),
@@ -201,10 +207,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      SignInScreen(),
+                                                      const SignInScreen(),
                                                 ));
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Masuk',
                                             style: TextStyle(
                                               color: Color(0xFF0B5BA5),
