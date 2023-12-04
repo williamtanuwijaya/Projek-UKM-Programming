@@ -108,7 +108,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 160),
+                                    const SizedBox(height: 160),
                                     Center(
                                       child: ElevatedButton(
                                         onPressed: () {},
@@ -135,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                         const Text('Lupa Kata Sandi? '),
                                         InkWell(
                                           onTap: () {},
-                                          child: Text(
+                                          child: const Text(
                                             'Lupa Password',
                                             style: TextStyle(
                                               color: Color(0xFF0B5BA5),
@@ -151,7 +151,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                         const Text('Tidak Punya Akun? '),
                                         InkWell(
                                           onTap: () {},
-                                          child: Text(
+                                          child: const Text(
                                             'Daftar',
                                             style: TextStyle(
                                               color: Color(0xFF0B5BA5),
