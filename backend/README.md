@@ -5,6 +5,7 @@ Kami menggunakan backendnya yaitu ExpressJS yang bertujuan untuk membuat RESTFUL
 
 ## Install
 - [NodeJS](https://nodejs.org/en)
+- [MySQL](https://www.mysql.com/)
 
 
 
