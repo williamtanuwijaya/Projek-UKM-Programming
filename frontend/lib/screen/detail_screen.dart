@@ -4,7 +4,9 @@ import 'package:ukm_project/models/wisata.dart';
 class DetailScreen extends StatelessWidget {
   final Wisata wisata;
 
-  const DetailScreen({super.key, required this.wisata});
+  DetailScreen({super.key, required this.wisata}) {
+    wisata.views++;
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -208,7 +208,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: 1.1,
-                          crossAxisSpacing: 0.0,
+                          crossAxisSpacing: 10.0,
                           mainAxisSpacing: 5,
                         ),
                         physics: const NeverScrollableScrollPhysics(),
@@ -225,21 +225,25 @@ class _SearchScreenState extends State<SearchScreen> {
                                   ));
                             },
                             child: Container(
-                              decoration:
-                                  const BoxDecoration(color: Colors.white),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(
-                                          wisata.imageTitleUrl,
-                                          errorBuilder:
-                                              (context, error, stackTrace) =>
-                                                  Placeholder(),
-                                        )),
+                                    child: Container(
+                                      height: 120,
+                                      width: 200,
+                                      child: Image.network(
+                                        wisata.imageTitleUrl,
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                Placeholder(),
+                                      ),
+                                    ),
                                   ),
                                   Text(
                                     wisata.nama,

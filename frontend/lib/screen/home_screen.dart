@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ukm_project/screen/kategori_screen.dart';
 import 'package:ukm_project/screen/search_screen.dart';
 import '../widgets/custom_navigation_bar.dart';
 
@@ -35,6 +36,32 @@ class _HomeScreenState extends State<HomeScreen> {
                       Icon(Icons.arrow_drop_down),
                     ],
                   ),
+                ),
+                const SizedBox(height: 2),
+                TextField(
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: const Color(0xFF3980D1),
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    hintText: 'Mencari...',
+                    hintStyle: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SearchScreen(),
+                        ));
+                  },
                 ),
                 const Text(
                   'Mau kemana hari ini?',
@@ -130,38 +157,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                TextField(
-                  readOnly: true,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: const Color(0xFF3980D1),
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                    hintText: 'Mencari...',
-                    hintStyle: const TextStyle(
-                      color: Colors.white,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SearchScreen(),
-                        ));
-                  },
-                ),
-                const SizedBox(height: 20),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: <Widget>[
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    KategoriScreen(kategori: 'wisata alam'),
+                              ));
+                        },
                         child: const SizedBox(
                           width: 90,
                           child: Column(
@@ -174,7 +182,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    KategoriScreen(kategori: 'wahana'),
+                              ));
+                        },
                         child: const SizedBox(
                           width: 90,
                           child: Column(
@@ -187,7 +202,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    KategoriScreen(kategori: 'wisata air'),
+                              ));
+                        },
                         child: const SizedBox(
                           width: 90,
                           child: Column(
@@ -200,7 +222,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    KategoriScreen(kategori: 'budaya'),
+                              ));
+                        },
                         child: const SizedBox(
                           width: 90,
                           child: Column(
@@ -213,7 +242,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    KategoriScreen(kategori: 'hotel'),
+                              ));
+                        },
                         child: const SizedBox(
                           width: 90,
                           child: Column(
@@ -226,7 +262,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    KategoriScreen(kategori: 'kebun binatang'),
+                              ));
+                        },
                         child: const SizedBox(
                           width: 90,
                           child: Column(

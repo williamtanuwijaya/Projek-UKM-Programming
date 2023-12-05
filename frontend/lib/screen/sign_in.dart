@@ -150,7 +150,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                       children: [
                                         const Text('Tidak Punya Akun? '),
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
                                           child: const Text(
                                             'Daftar',
                                             style: TextStyle(
