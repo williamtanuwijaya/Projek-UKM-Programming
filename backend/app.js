@@ -20,4 +20,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 
+console.log(`Server is running http://localhost:3000`);
+
 module.exports = app;
