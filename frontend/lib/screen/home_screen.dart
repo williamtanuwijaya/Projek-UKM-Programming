@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:ukm_project/screen/kategori_screen.dart';
 import 'package:ukm_project/screen/search_screen.dart';
+import 'package:ukm_project/models/location_data.dart' as locationData;
 import '../widgets/custom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,6 +18,71 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  locationData.LocationData currentLocation = locationData.LocationData(
+      city: "Loading...",
+      province: 'Loading...',
+      latitude: 0.0,
+      longitude: 0.0);
+  Location location = Location();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchLocationData();
+  }
+
+  Future<void> fetchLocationData() async {
+    try {
+      locationData.LocationData result = await getCurrentLocation();
+      setState(() {
+        currentLocation = result;
+      });
+    } catch (e) {
+      print('Error fetching location data: $e');
+    }
+  }
+
+  Future<locationData.LocationData> getCurrentLocation() async {
+    try {
+      var userLocation = await location.getLocation();
+      double latitude = userLocation.latitude!;
+      double longitude = userLocation.longitude!;
+      return await getCityDataFromCoordinates(latitude, longitude);
+    } catch (e) {
+      print('Error getting current location: $e');
+      return locationData.LocationData(
+          city: "Unknown", province: 'Unknown', latitude: 0.0, longitude: 0.0);
+    }
+  }
+
+  Future<locationData.LocationData> getCityDataFromCoordinates(
+      double latitude, double longitude) async {
+    final apiKey = '6c5ed6878672432b8604c7f112179000';
+    final apiUrl =
+        'https://api.opencagedata.com/geocode/v1/json?q=$latitude+$longitude&key=$apiKey';
+
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        if (data['results'] != null && data['results'].isNotEmpty) {
+          final city = data['results'][0]['components']['city'];
+          final province = data['results'][0]['components']['state'];
+          final lat = data['results'][0]['geometry']['lat'];
+          final lon = data['results'][0]['geometry']['lng'];
+
+          return locationData.LocationData(
+              city: city, province: province, latitude: lat, longitude: lon);
+        }
+      }
+    } catch (e) {
+      print('Error getting city data: $e');
+    }
+
+    return locationData.LocationData(
+        city: "Unknown", province: 'Unknown', latitude: 0.0, longitude: 0.0);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +96,16 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.location_on,
                         color: Colors.blue,
                       ),
-                      Text('Palembang, Sumatera Selatan'),
-                      Icon(Icons.arrow_drop_down),
+                      Text(
+                          '${currentLocation.city}, ${currentLocation.province}'),
+                      const Icon(Icons.arrow_drop_down),
                     ],
                   ),
                 ),
@@ -68,8 +139,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   'Mau kemana hari ini?',
                   style: TextStyle(fontSize: 16),
                 ),
-                const Text(
-                  'Palembang',
+                Text(
+                  currentLocation.city,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 Container(
