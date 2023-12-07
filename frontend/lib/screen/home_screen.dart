@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
+import 'package:ukm_project/screen/kategori_screen.dart';
 import 'package:ukm_project/screen/search_screen.dart';
 import '../widgets/custom_navigation_bar.dart';
 
@@ -36,6 +38,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 2),
+                TextField(
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: const Color(0xFF3980D1),
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    hintText: 'Mencari...',
+                    hintStyle: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SearchScreen(),
+                        ));
+                  },
+                ),
                 const Text(
                   'Mau kemana hari ini?',
                   style: TextStyle(fontSize: 16),
@@ -49,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFFCCE3FD),
+                    color: const Color(0xFFCCE3FD),
                     boxShadow: const [
                       BoxShadow(
                         color: Colors.grey,
@@ -130,38 +158,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                TextField(
-                  readOnly: true,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: const Color(0xFF3980D1),
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                    hintText: 'Mencari...',
-                    hintStyle: const TextStyle(
-                      color: Colors.white,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SearchScreen(),
-                        ));
-                  },
-                ),
-                const SizedBox(height: 20),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: <Widget>[
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const KategoriScreen(
+                                    kategori: 'wisata alam'),
+                              ));
+                        },
                         child: const SizedBox(
                           width: 90,
                           child: Column(
@@ -174,10 +183,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
-                        child: SizedBox(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const KategoriScreen(kategori: 'wahana'),
+                              ));
+                        },
+                        child: const SizedBox(
                           width: 90,
-                          child: const Column(
+                          child: Column(
                             children: [
                               Icon(Icons.castle),
                               SizedBox(height: 8),
@@ -187,10 +203,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
-                        child: SizedBox(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const KategoriScreen(
+                                    kategori: 'wisata air'),
+                              ));
+                        },
+                        child: const SizedBox(
                           width: 90,
-                          child: const Column(
+                          child: Column(
                             children: [
                               Icon(Icons.beach_access),
                               SizedBox(height: 8),
@@ -200,10 +223,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
-                        child: SizedBox(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const KategoriScreen(kategori: 'budaya'),
+                              ));
+                        },
+                        child: const SizedBox(
                           width: 90,
-                          child: const Column(
+                          child: Column(
                             children: [
                               Icon(Icons.house),
                               SizedBox(height: 8),
@@ -213,10 +243,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
-                        child: SizedBox(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const KategoriScreen(kategori: 'hotel'),
+                              ));
+                        },
+                        child: const SizedBox(
                           width: 90,
-                          child: const Column(
+                          child: Column(
                             children: [
                               Icon(Icons.bed),
                               SizedBox(height: 8),
@@ -226,10 +263,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
-                        child: SizedBox(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const KategoriScreen(
+                                    kategori: 'kebun binatang'),
+                              ));
+                        },
+                        child: const SizedBox(
                           width: 90,
-                          child: const Column(
+                          child: Column(
                             children: [
                               Icon(Icons.place),
                               SizedBox(height: 8),

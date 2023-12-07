@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ukm_project/data/list_wisata.dart';
+import 'package:ukm_project/models/wisata.dart';
+import 'package:ukm_project/screen/detail_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -20,6 +23,7 @@ class _SearchScreenState extends State<SearchScreen> {
   ];
 
   List<String> history = [];
+  List<Wisata> _filteredWisata = [];
 
   @override
   void initState() {
@@ -33,6 +37,31 @@ class _SearchScreenState extends State<SearchScreen> {
   void dispose() {
     _searchFocusNode.dispose();
     super.dispose();
+  }
+
+  void submit() {
+    setState(() {
+      _filteredWisata.clear();
+      if (_pencarianController.text.isNotEmpty) {
+        if (!history.contains(_pencarianController.text.trim())) {
+          history.add(_pencarianController.text.toLowerCase());
+          if (history.length > 10) {
+            history.removeAt(0);
+          }
+        }
+        for (var wisata in listWisata) {
+          String lowercasedSearch =
+              _pencarianController.text.toLowerCase().trim();
+          final regex = RegExp(r'\b' + RegExp.escape(lowercasedSearch) + r'\b',
+              caseSensitive: false);
+          if (regex.hasMatch(wisata.nama.toLowerCase())) {
+            if (!_filteredWisata.contains(wisata)) {
+              _filteredWisata.add(wisata);
+            }
+          }
+        }
+      }
+    });
   }
 
   @override
@@ -65,19 +94,10 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                   onSubmitted: (value) {
-                    setState(() {
-                      if (_pencarianController.text.isNotEmpty) {
-                        if (!history.contains(_pencarianController.text)) {
-                          history.add(value);
-                        }
-                      }
-                      if (history.length > 10) {
-                        history.removeAt(0);
-                      }
-                    });
+                    submit();
                   },
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 if (_pencarianController.text.isEmpty)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,16 +133,21 @@ class _SearchScreenState extends State<SearchScreen> {
                                 children:
                                     List.generate(history.length, (index) {
                                   return InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      setState(() {
+                                        _pencarianController.text =
+                                            history[history.length - 1 - index];
+                                      });
+                                    },
                                     child: Container(
-                                      padding: EdgeInsets.all(4),
+                                      padding: const EdgeInsets.all(4),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(6),
                                       ),
                                       child: Text(
                                         history[history.length - 1 - index],
-                                        style: TextStyle(fontSize: 12),
+                                        style: const TextStyle(fontSize: 12),
                                       ),
                                     ),
                                   );
@@ -145,16 +170,25 @@ class _SearchScreenState extends State<SearchScreen> {
                           runSpacing: 8.0,
                           children: List.generate(populer.length, (index) {
                             return InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                setState(() {
+                                  _pencarianController.text =
+                                      populer[index].toLowerCase();
+                                  history.add(populer[index].toLowerCase());
+                                  if (history.length > 10) {
+                                    history.removeAt(0);
+                                  }
+                                });
+                              },
                               child: Container(
-                                padding: EdgeInsets.all(4),
+                                padding: const EdgeInsets.all(4),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Text(
                                   populer[index],
-                                  style: TextStyle(fontSize: 12),
+                                  style: const TextStyle(fontSize: 12),
                                 ),
                               ),
                             );
@@ -165,7 +199,74 @@ class _SearchScreenState extends State<SearchScreen> {
                   )
                 // endif
                 else
-                  Placeholder(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GridView.builder(
+                        shrinkWrap: true,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1.1,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 5,
+                        ),
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: _filteredWisata.length,
+                        itemBuilder: (context, index) {
+                          Wisata wisata = _filteredWisata[index];
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DetailScreen(wisata: wisata),
+                                  ));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Container(
+                                      height: 120,
+                                      width: 200,
+                                      child: Image.network(
+                                        wisata.imageTitleUrl,
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                const Placeholder(),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    wisata.nama,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.star,
+                                        color: Colors.yellow,
+                                      ),
+                                      Text(wisata.rating.toString()),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 // endelse
               ],
             ),
