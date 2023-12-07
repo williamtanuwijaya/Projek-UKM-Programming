@@ -41,9 +41,9 @@ class _KategoriScreenState extends State<KategoriScreen> {
   }
 
   GridView makeGridItem() {
-    List<Wisata> _sortedListKategoriWisata = _listKategoriWisata;
+    List<Wisata> sortedListKategoriWisata = _listKategoriWisata;
     setState(() {
-      _sortedListKategoriWisata.sort((a, b) => b.views.compareTo(a.views));
+      sortedListKategoriWisata.sort((a, b) => b.views.compareTo(a.views));
     });
     if (selectedTombol == 'Terpopuler') {
       return GridView.builder(
@@ -54,9 +54,9 @@ class _KategoriScreenState extends State<KategoriScreen> {
           crossAxisSpacing: 10.0,
           mainAxisSpacing: 5,
         ),
-        itemCount: _sortedListKategoriWisata.length,
+        itemCount: sortedListKategoriWisata.length,
         itemBuilder: (context, index) {
-          final Wisata wisata = _sortedListKategoriWisata[index];
+          final Wisata wisata = sortedListKategoriWisata[index];
           return InkWell(
             onTap: () {
               Navigator.push(
@@ -80,7 +80,7 @@ class _KategoriScreenState extends State<KategoriScreen> {
                         wisata.imageTitleUrl,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
-                            Placeholder(),
+                            const Placeholder(),
                       ),
                     ),
                   ),
@@ -90,7 +90,7 @@ class _KategoriScreenState extends State<KategoriScreen> {
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.star,
                         color: Colors.yellow,
                       ),
@@ -137,7 +137,7 @@ class _KategoriScreenState extends State<KategoriScreen> {
                         wisata.imageTitleUrl,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
-                            Placeholder(),
+                            const Placeholder(),
                       ),
                     ),
                   ),
@@ -147,7 +147,7 @@ class _KategoriScreenState extends State<KategoriScreen> {
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.star,
                         color: Colors.yellow,
                       ),
@@ -194,7 +194,7 @@ class _KategoriScreenState extends State<KategoriScreen> {
                         wisata.imageTitleUrl,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
-                            Placeholder(),
+                            const Placeholder(),
                       ),
                     ),
                   ),
@@ -204,7 +204,7 @@ class _KategoriScreenState extends State<KategoriScreen> {
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.star,
                         color: Colors.yellow,
                       ),
@@ -255,7 +255,7 @@ class _KategoriScreenState extends State<KategoriScreen> {
                         wisata.imageTitleUrl,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
-                            Placeholder(),
+                            const Placeholder(),
                       ),
                     ),
                   ),
@@ -319,9 +319,10 @@ class _KategoriScreenState extends State<KategoriScreen> {
                 ),
                 Text(
                   makeKategoriCamel(),
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 28, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -342,7 +343,7 @@ class _KategoriScreenState extends State<KategoriScreen> {
                       ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Column(
                   children: [
                     makeGridItem(),
@@ -373,16 +374,18 @@ class TombolSort extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 6, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: isSelected ? Color(0x15176FF2) : Colors.transparent,
+          color: isSelected ? const Color(0x15176FF2) : Colors.transparent,
         ),
         child: Text(
           namaTombol,
           style: TextStyle(
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              color: isSelected ? Color(0xFF176FF2) : Color(0xFFB8B8B8)),
+              color: isSelected
+                  ? const Color(0xFF176FF2)
+                  : const Color(0xFFB8B8B8)),
         ),
       ),
     );

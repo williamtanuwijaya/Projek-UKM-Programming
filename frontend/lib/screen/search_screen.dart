@@ -241,7 +241,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                         fit: BoxFit.cover,
                                         errorBuilder:
                                             (context, error, stackTrace) =>
-                                                Placeholder(),
+                                                const Placeholder(),
                                       ),
                                     ),
                                   ),
@@ -252,7 +252,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   ),
                                   Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Colors.yellow,
                                       ),

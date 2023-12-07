@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:ukm_project/screen/kategori_screen.dart';
 import 'package:ukm_project/screen/search_screen.dart';
 import '../widgets/custom_navigation_bar.dart';
@@ -166,8 +167,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    KategoriScreen(kategori: 'wisata alam'),
+                                builder: (context) => const KategoriScreen(
+                                    kategori: 'wisata alam'),
                               ));
                         },
                         child: const SizedBox(
@@ -187,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    KategoriScreen(kategori: 'wahana'),
+                                    const KategoriScreen(kategori: 'wahana'),
                               ));
                         },
                         child: const SizedBox(
@@ -206,8 +207,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    KategoriScreen(kategori: 'wisata air'),
+                                builder: (context) => const KategoriScreen(
+                                    kategori: 'wisata air'),
                               ));
                         },
                         child: const SizedBox(
@@ -227,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    KategoriScreen(kategori: 'budaya'),
+                                    const KategoriScreen(kategori: 'budaya'),
                               ));
                         },
                         child: const SizedBox(
@@ -247,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    KategoriScreen(kategori: 'hotel'),
+                                    const KategoriScreen(kategori: 'hotel'),
                               ));
                         },
                         child: const SizedBox(
@@ -266,8 +267,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    KategoriScreen(kategori: 'kebun binatang'),
+                                builder: (context) => const KategoriScreen(
+                                    kategori: 'kebun binatang'),
                               ));
                         },
                         child: const SizedBox(
