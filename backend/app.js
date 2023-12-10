@@ -12,6 +12,7 @@ let registerRouter = require('./routes/register');
 let loginRouter = require('./routes/login');
 let forgotPasswordRouter = require('./routes/forgotPassword');
 let resetPasswordRouter = require('./routes/resetPassword');
+let userDataRouter = require('./routes/userData');
 let app = express();
 
 app.use(logger('dev'));
@@ -29,6 +30,7 @@ app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/forgot-password', forgotPasswordRouter);
 app.use('/reset-password', resetPasswordRouter);
+app.use('/data-user', userDataRouter);
 
 console.log(`Server is running http://localhost:3000`);
 

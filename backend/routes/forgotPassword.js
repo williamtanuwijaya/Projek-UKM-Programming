@@ -1,7 +1,8 @@
 let express = require('express');
-const { queryDb } = require('../database/queryDb');
 const { sendResetEmail } = require('../public/javascripts/sendResetEmail');
+const { queryDb } = require('../database/connectedDatabase');
 let router = express.Router();
+let crypto = require('crypto');
 
 router.post('/', async (req, res) => {
   try {
