@@ -23,6 +23,7 @@ Kami menggunakan backendnya yaitu ExpressJS yang bertujuan untuk membuat RESTFUL
 | `/api/data-user/:userId` | `GET` | Menampilkan semua data user berdasarkan id |
 | `/api/data-user/:userId` | `DELETE` | Menghapus data user berdasarkan id |
 | `/api/data-user/:userId` | `PUT` | Mengupdate data user terdiri dari (email, username, phone, name, confirmPasswod) berdasarkan id |
+| `/api/data-user/:userId` | `PATCH` | Mengupdate salah satu / beberapa data user yang terdiri dari (email, username, phone, name, confirmPasswod) berdasarkan id |
 
 ## Documentation
 
