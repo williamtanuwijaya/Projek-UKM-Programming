@@ -1,6 +1,6 @@
 let express = require('express');
-const { sendResetEmail } = require('../public/javascripts/sendResetEmail');
-const { queryDb } = require('../database/connectedDatabase');
+const { sendResetEmail } = require('../../public/javascripts/sendResetEmail');
+const { queryDb } = require('../../database/connectedDatabase');
 let router = express.Router();
 let crypto = require('crypto');
 

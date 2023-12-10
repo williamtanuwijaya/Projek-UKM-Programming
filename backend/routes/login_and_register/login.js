@@ -1,5 +1,5 @@
 let express = require('express');
-const { queryDb } = require('../database/connectedDatabase');
+const { queryDb } = require('../../database/connectedDatabase');
 let router = express.Router();
 let bcrypt = require('bcrypt');
 

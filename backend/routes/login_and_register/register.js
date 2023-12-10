@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let bcrypt = require('bcrypt');
-const { queryDb } = require('../database/connectedDatabase');
+const { queryDb } = require('../../database/connectedDatabase');
 
 router.post('/', async (req, res) => {
   try {
