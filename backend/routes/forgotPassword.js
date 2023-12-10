@@ -1,5 +1,6 @@
 let express = require('express');
 const { queryDb } = require('../database/queryDb');
+const { sendResetEmail } = require('../public/javascripts/sendResetEmail');
 let router = express.Router();
 
 router.post('/', async (req, res) => {
