@@ -45,37 +45,6 @@ router.delete('/:userId', async (req, res) => {
   }
 });
 
-// PUT route to update a user by ID without updating the password
-router.put('/:userId', async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const { email, username, phone, name, confirmPassword } = req.body;
-
-    // Confirm the password before proceeding with the update
-    const getUserPasswordQuery = 'SELECT password FROM users WHERE id = ?';
-    const userPasswordResult = await queryDb(getUserPasswordQuery, [userId]);
-
-    if (userPasswordResult.length === 0) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    const isPasswordValid = await bcrypt.compare(confirmPassword, userPasswordResult[0].password);
-
-    if (!isPasswordValid) {
-      return res.status(401).json({ error: 'Invalid password confirmation' });
-    }
-
-    // Update user in the database without updating the password
-    const updateUserQuery = 'UPDATE users SET email = ?, username = ?, phone = ?, name = ? WHERE id = ?';
-    await queryDb(updateUserQuery, [email, username, phone, name, userId]);
-
-    res.status(200).json({ message: 'User updated successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
 // PATCH route to partially update a user by ID without updating the password
 router.patch("/:userId", async (req, res) => {
   try {
