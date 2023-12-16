@@ -1,309 +1,233 @@
 import 'package:flutter/material.dart';
-import 'package:ukm_project/models/wisata.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../models/wisata.dart';
 
 class DetailScreen extends StatelessWidget {
   final Wisata wisata;
-
-  DetailScreen({super.key, required this.wisata}) {
-    wisata.views++;
-  }
+  const DetailScreen({super.key, required this.wisata});
 
   @override
   Widget build(BuildContext context) {
+    final informationTextStyle = const TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.bold,
+    );
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Align(
-          alignment: AlignmentDirectional(-1.00, 0),
-          child: Text(
-            'Kembali',
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        leading: const Icon(
-          Icons.arrow_back_rounded,
-          color: Color(0xFF0F1113),
-          size: 30,
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.favorite,
-              color: Colors.red,
-              size: 30,
-            ),
-            onPressed: () {
-              print('Favorite pressed ...');
-            },
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.import_export,
-              color: Colors.black,
-              size: 30,
-            ),
-            onPressed: () {
-              print('Export pressed ...');
-            },
-          ),
-        ],
-      ),
-      body: Container(
-        height: double.infinity,
-        color: const Color.fromARGB(255, 242, 247, 253),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
+      body: SafeArea(
+        child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Hero(
-                      tag: 'locationImage',
-                      transitionOnUserGestures: true,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          wisata.imageTitleUrl,
-                          width: double.infinity,
-                          height: 250,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
                     ),
-                    const Row(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                          child: Text(
-                            wisata.nama,
-                            style: TextStyle(
-                              fontFamily: 'Outfit',
-                              color: Color(0xFF0F1113),
-                              fontSize: 32,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Align(
-                            alignment: AlignmentDirectional(1.00, 0.00),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
-                              child: Text(
-                                'Tampilkan Peta',
-                                style: TextStyle(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.amber,
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                const FavoriteButton(),
+              ],
+            ),
+            SizedBox(
+              height: 150,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: wisata.imageUrls.map((url) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(url),
                     ),
-                    const Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Icon(
-                            Icons.star_rounded,
-                            color: Colors.yellow,
-                            size: 24,
-                          ),
-                          Text(
-                            '${wisata.rating} (${wisata.views} Ulasan)',
-                            style: TextStyle(
-                              fontFamily: 'Plus Jakarta Sans',
-                              color: Color(0xFF0F1113),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(4, 4, 0, 0),
-                      child: Text(
-                        wisata.deskripsi,
-                        style: TextStyle(
-                          fontFamily: 'Plus Jakarta Sans',
-                          color: Color(0xFF0F1113),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        const Text(
-                          'Baca selengkapnya',
-                          style: TextStyle(
-                            fontFamily: 'Readex Pro',
-                            color: Colors.amber,
-                          ),
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.amber,
-                            size: 20,
-                          ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          const Align(
-                            alignment: AlignmentDirectional.topStart,
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                              child: Text(
-                                'Penilaian',
-                                style: TextStyle(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.amber,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Container(
-                                width: 60,
-                                height: 60,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.asset(
-                                  'images/maren.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              const Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                                child: Text(
-                                  'Maren Kenter',
-                                  style: TextStyle(
-                                    fontFamily: 'Readex Pro',
-                                    color: Color(0xFF3683BE),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Align(
-                                  alignment:
-                                      const AlignmentDirectional(1.00, 0.00),
-                                  child: IconButton(
-                                    icon: const Icon(
-                                      Icons.thumb_up_outlined,
-                                      color: Color(0xFF3683BE),
-                                      size: 24,
-                                    ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
-                                    },
-                                  ),
-                                ),
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.thumb_down_outlined,
-                                  color: Color(0xFF3683BE),
-                                  size: 24,
-                                ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Align(
-                                alignment:
-                                    const AlignmentDirectional(-1.00, 0.00),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0, 5, 0, 0),
-                                  child: RatingBarIndicator(
-                                    itemBuilder: (context, index) => const Icon(
-                                      Icons.star_rounded,
-                                      color: Colors.yellow,
-                                    ),
-                                    direction: Axis.horizontal,
-                                    rating: 5,
-                                    unratedColor: const Color(0xFF95A1AC),
-                                    itemCount: 5,
-                                    itemSize: 20,
-                                  ),
-                                ),
-                              ),
-                              const Expanded(
-                                child: Align(
-                                  alignment: AlignmentDirectional(1.00, 0.00),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        190, 0, 0, 0),
-                                    child: Text(
-                                      '12/12/2023',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 0),
-                            child: Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempus nisi non velit euismod, a ultricies urna luctus. Sed sagittis velit a sem varius consectetur. Mauris sed felis eu ex pulvinar eleifend. Fusce at purus diam. Integer',
-                              style: TextStyle(
-                                fontFamily: 'Readex Pro',
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  );
+                }).toList(),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 16.0),
+              padding: const EdgeInsets.all(10),
+              child: Text(
+                wisata.nama,
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontFamily: 'Staatliches',
                 ),
               ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.star_rounded,
+                    color: Colors.yellow,
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  Text(
+                    wisata.rating as String,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12,
+                    ),
+                  ),
+                  const Text(
+                    ' (255 Ulasan)',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 165),
+                    child: const Text(
+                      ' Tampilkan peta',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: Text(
+                wisata.deskripsi,
+                textAlign: TextAlign.justify,
+                style: const TextStyle(fontSize: 16.0),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: const Row(
+                children: [
+                  Text(
+                    'Baca Selengkapnya',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_drop_down_sharp,
+                    color: Colors.blue,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 16.0),
+              padding: const EdgeInsets.all(10),
+              child: const Text(
+                'Penilaian',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontFamily: 'Staatliches',
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      const Column(
+                        children: [
+                          Text(
+                            'Harga',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontFamily: 'Staatliches',
+                            ),
+                          ),
+                          Text(
+                            'IDR 24.000',
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Staatliches',
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(left: 100),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: TextButton(
+                            onPressed: () {},
+                            style: TextButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                            ),
+                            child: const Column(
+                              children: [
+                                Text(
+                                  'Pesan Sekarang',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Staatliches',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class FavoriteButton extends StatefulWidget {
+  const FavoriteButton({super.key});
+
+  @override
+  _FavoriteButtonState createState() => _FavoriteButtonState();
+}
+
+class _FavoriteButtonState extends State<FavoriteButton> {
+  bool isFavorite = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        isFavorite ? Icons.favorite : Icons.favorite_border,
+        color: Colors.red,
+      ),
+      onPressed: () {
+        setState(() {
+          isFavorite = !isFavorite;
+        });
+      },
     );
   }
 }
