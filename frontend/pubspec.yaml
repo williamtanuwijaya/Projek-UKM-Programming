@@ -9,9 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.1.2
+  http: ^1.1.0
   location: ^5.0.3
   intl: ^0.18.1
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:
