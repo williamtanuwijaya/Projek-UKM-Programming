@@ -19,5 +19,6 @@ class Wisata {
     this.isFavorite = false,
     this.rating = 0,
     this.views = 0,
+    this.imageUrls = const [],
   });
 }
