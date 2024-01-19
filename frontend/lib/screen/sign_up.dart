@@ -203,6 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         const Text('Sudah Punya Akun? '),
                                         InkWell(
                                           onTap: () {
+                                            Navigator.pop(context);
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(

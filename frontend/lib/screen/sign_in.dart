@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ukm_project/api/api_service.dart';
+import 'package:ukm_project/models/pengguna.dart';
+import 'package:ukm_project/screen/sign_up.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -11,7 +14,30 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _namaPenggunaController = TextEditingController();
   final TextEditingController _kataSandiController = TextEditingController();
 
+  final ApiService apiService = ApiService('http:/');
+
   bool isRemembered = false;
+
+  Future<void> _submitLogin() async {
+    final username = _namaPenggunaController.text;
+    final password = _kataSandiController.text;
+
+    try {
+      final response = await apiService
+          .loginUser(Pengguna(username: username, password: password));
+
+      if (response['success']) {
+        print('Login successful');
+      } else {
+        // Login failed
+        print('Login failed: ${response['error']}');
+      }
+    } catch (error) {
+      print('Error during login request: $error');
+    }
+
+    Navigator.pushNamed(context, '/home');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +137,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                     const SizedBox(height: 160),
                                     Center(
                                       child: ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          _submitLogin();
+                                        },
                                         style: ButtonStyle(
                                           fixedSize: MaterialStateProperty.all(
                                             const Size(340, 60),
@@ -152,6 +180,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                         InkWell(
                                           onTap: () {
                                             Navigator.pop(context);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const SignUpScreen()));
                                           },
                                           child: const Text(
                                             'Daftar',
