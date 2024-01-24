@@ -20,6 +20,8 @@ class MainApp extends StatelessWidget {
       home: const SignInScreen(),
       initialRoute: '/',
       routes: {
+        '/sign_in': (context) => const SignInScreen(),
+        '/sign_up': (context) => const SignUpScreen(),
         '/home': (context) => const HomeScreen(),
         '/favorite': (context) => const FavoriteScreen(),
         '/order': (context) => const OrderScreen(),

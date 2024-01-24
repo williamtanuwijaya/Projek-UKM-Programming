@@ -9,7 +9,7 @@ class Pengguna {
 
   Pengguna({
     this.id = 0,
-    this.email = '',
+    required this.email,
     required this.username,
     required this.password,
     this.phone = '',
@@ -19,13 +19,23 @@ class Pengguna {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'email': email,
       'username': username,
       'password': password,
       'phone': phone,
       'name': name,
-      'reset_token': reset_token,
     };
+  }
+
+  factory Pengguna.fromJson(Map<String, dynamic> json) {
+    return Pengguna(
+      id: json['id'],
+      email: json['email'],
+      username: json['username'],
+      password: json['password'],
+      phone: json['phone'],
+      name: json['name'],
+      reset_token: json['reset_token'] ?? '',
+    );
   }
 }

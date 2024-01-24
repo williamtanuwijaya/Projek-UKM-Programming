@@ -14,7 +14,9 @@ let forgotPasswordRouter = require('./routes/login_and_register/forgotPassword')
 let resetPasswordRouter = require('./routes/login_and_register/resetPassword');
 let userDataRouter = require('./routes/login_and_register/userData');
 let app = express();
+let cors = require('cors');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

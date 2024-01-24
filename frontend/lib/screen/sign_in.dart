@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ukm_project/api/api_service.dart';
+import 'package:ukm_project/data/cur_pengguna.dart';
 import 'package:ukm_project/models/pengguna.dart';
 import 'package:ukm_project/screen/sign_up.dart';
 
@@ -14,7 +15,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _namaPenggunaController = TextEditingController();
   final TextEditingController _kataSandiController = TextEditingController();
 
-  final ApiService apiService = ApiService('http:/');
+  final ApiService apiService = ApiService();
 
   bool isRemembered = false;
 
@@ -23,11 +24,13 @@ class _SignInScreenState extends State<SignInScreen> {
     final password = _kataSandiController.text;
 
     try {
-      final response = await apiService
-          .loginUser(Pengguna(username: username, password: password));
+      final response = await apiService.loginUser(
+          Pengguna(email: "", username: username, password: password));
 
       if (response['success']) {
         print('Login successful');
+        pengguna = Pengguna.fromJson(response['data']);
+        Navigator.pushNamed(context, '/home');
       } else {
         // Login failed
         print('Login failed: ${response['error']}');
@@ -35,8 +38,6 @@ class _SignInScreenState extends State<SignInScreen> {
     } catch (error) {
       print('Error during login request: $error');
     }
-
-    Navigator.pushNamed(context, '/home');
   }
 
   @override
