@@ -32,7 +32,7 @@ class Pengguna {
       id: json['id'],
       email: json['email'],
       username: json['username'],
-      password: json['password'],
+      password: "",
       phone: json['phone'],
       name: json['name'],
       reset_token: json['reset_token'] ?? '',
