@@ -3,6 +3,7 @@ import 'package:ukm_project/screen/favorite_screen.dart';
 import 'package:ukm_project/screen/home_screen.dart';
 import 'package:ukm_project/screen/order_screen.dart';
 import 'package:ukm_project/screen/profile_screen.dart';
+import 'package:ukm_project/screen/sign_in.dart';
 import 'package:ukm_project/screen/sign_up.dart';
 
 void main() {
@@ -16,9 +17,11 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const ProfileScreen(),
+      home: const SignInScreen(),
       initialRoute: '/',
       routes: {
+        '/sign_in': (context) => const SignInScreen(),
+        '/sign_up': (context) => const SignUpScreen(),
         '/home': (context) => const HomeScreen(),
         '/favorite': (context) => const FavoriteScreen(),
         '/order': (context) => const OrderScreen(),

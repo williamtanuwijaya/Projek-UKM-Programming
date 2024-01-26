@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
       return res.status(401).json({ error: 'Invalid username or password' });
     }
 
-    res.status(200).json({ message: 'Login successful' });
+    res.status(200).json({ message: 'Login successful', user: user[0] });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
