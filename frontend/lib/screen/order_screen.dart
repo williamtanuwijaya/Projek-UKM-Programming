@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ukm_project/widgets/custom_navigation_bar.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
 
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
@@ -16,6 +17,8 @@ class _OrderScreenState extends State<OrderScreen> {
   int totalHargaDewasa = 0;
   int totalHargaAnak = 0;
   int totalHarga = 0;
+  DateTime _selectedDate = DateTime.now();
+  final ValueNotifier<DateTime> _selectedDateNotifier = ValueNotifier(DateTime.now());
 
   void kurangOrangDewasa() {
     setState(() {
@@ -51,6 +54,54 @@ class _OrderScreenState extends State<OrderScreen> {
       totalHargaAnak = hargaAnak * jumlahOrangAnak;
       totalHarga += hargaAnak;
     });
+  }
+
+  void _onDaySelected(DateTime day, DateTime focusedDay) {
+    setState(() {
+      _selectedDate = day;
+    });
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    return showModalBottomSheet(
+      context: context,
+      builder: (BuildContext builder) {
+        return ValueListenableBuilder<DateTime>(
+          valueListenable: _selectedDateNotifier,
+          builder: (context, selectedDate, _) {
+            return Container(
+              height: MediaQuery.of(context).size.height * 0.7,
+              child: Column(
+                children: [
+                  TableCalendar(
+                    firstDay: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+                    lastDay: DateTime(DateTime.now().year + 1),
+                    focusedDay: selectedDate,
+                    locale: "id_ID",
+                    headerStyle: const HeaderStyle(
+                      formatButtonVisible: false,
+                      titleCentered: true,
+                    ),
+                    availableGestures: AvailableGestures.all,
+                    onDaySelected: (day, focusedDay) {
+                      _selectedDateNotifier.value = day;
+                      _onDaySelected(day, focusedDay);
+                    },
+                    selectedDayPredicate: (day) => isSameDay(day, selectedDate),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Pilih Tanggal Ini'),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -150,9 +201,9 @@ class _OrderScreenState extends State<OrderScreen> {
                             color: Colors.white,
                             borderRadius: BorderRadius.all(Radius.circular(15)),
                           ),
-                          child: const Row(
+                          child: Row(
                             children: [
-                              Padding(
+                              const Padding(
                                 padding: EdgeInsets.all(12.0),
                                 child: Icon(
                                     Icons.calendar_month_rounded,
@@ -165,15 +216,16 @@ class _OrderScreenState extends State<OrderScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text('Tanggal'),
-                                    Text('26 Juni 2000')
+                                    Text('${DateFormat('dd MMMM yyyy', 'id_ID').format(_selectedDate.toLocal())}')
                                   ],
                                 ),
                               ),
                               Padding(
                                 padding: EdgeInsets.all(12.0),
-                                child: Icon(
-                                    Icons.edit_calendar_rounded,
-                                    color: Color(0xFF4280BD)
+                                child: IconButton(
+                                    icon: Icon(Icons.edit_calendar_rounded),
+                                    color: Color(0xFF4280BD),
+                                    onPressed: () => _selectDate(context),
                                 ),
                               ),
                             ],
@@ -431,13 +483,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                       width: double.infinity,
                                       child: ElevatedButton(
                                           style: ButtonStyle(
-                                            backgroundColor: MaterialStateProperty.resolveWith((states) {
-                                              // If the button is pressed, return green, otherwise blue
-                                              if (states.contains(MaterialState.pressed)) {
-                                                return Colors.green;
-                                              }
-                                              return Color(0xFF4280BD);
-                                            }),
+                                            backgroundColor: MaterialStateProperty.resolveWith((states) => Color(0xFF4280BD))
                                           ),
                                           onPressed: () {},
                                           child: const Text(
