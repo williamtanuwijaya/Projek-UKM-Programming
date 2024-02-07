@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ukm_project/api/location_provider.dart';
 import 'package:ukm_project/data/list_wisata.dart';
 import 'package:ukm_project/models/wisata.dart';
 import 'package:ukm_project/screen/detail_screen.dart';
@@ -115,49 +116,51 @@ class _KategoriScreenState extends State<KategoriScreen> {
         itemCount: _listKategoriWisata.length,
         itemBuilder: (context, index) {
           final Wisata wisata = _listKategoriWisata[index];
-          return InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailScreen(wisata: wisata),
-                  ));
-            },
-            child: Container(
-              decoration: const BoxDecoration(color: Colors.white),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      height: 120,
-                      width: 200,
-                      child: Image.network(
-                        wisata.imageTitleUrl,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            const Placeholder(),
+          if (wisata.namaKota == getCurLocation().city) {
+            return InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailScreen(wisata: wisata),
+                    ));
+              },
+              child: Container(
+                decoration: const BoxDecoration(color: Colors.white),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        height: 120,
+                        width: 200,
+                        child: Image.network(
+                          wisata.imageTitleUrl,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Placeholder(),
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    wisata.nama,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.star,
-                        color: Colors.yellow,
-                      ),
-                      Text(wisata.rating.toString()),
-                    ],
-                  ),
-                ],
+                    Text(
+                      wisata.nama,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                        ),
+                        Text(wisata.rating.toString()),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
+            );
+          }
         },
       );
     } else if (selectedTombol == 'Terlaris') {

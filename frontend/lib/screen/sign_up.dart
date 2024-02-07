@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ukm_project/api/api_service.dart';
+import 'package:ukm_project/models/pengguna.dart';
 import 'package:ukm_project/screen/sign_in.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -16,10 +18,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _konfirmasiSandiController =
       TextEditingController();
 
+  final ApiService apiService = ApiService();
+
   bool isAgreed = false;
 
-  void _signUp() {
-    Navigator.pushNamed(context, '/home');
+  void _signUp() async {
+    if (_namaLengkapController.text.isNotEmpty &&
+        _emailController.text.isNotEmpty &&
+        _namaPenggunaController.text.isNotEmpty &&
+        _kataSandiController.text.isNotEmpty &&
+        _konfirmasiSandiController.text.isNotEmpty) {
+      if (_kataSandiController.text == _konfirmasiSandiController.text) {
+        final response = await apiService.registerUser(Pengguna(
+          email: _emailController.text,
+          username: _namaPenggunaController.text,
+          password: _kataSandiController.text,
+          name: _namaLengkapController.text,
+          phone: '0811',
+        ));
+
+        if (response['success']) {
+          print('Registration successful');
+          Navigator.pushNamed(context, '/sign_in');
+        } else {
+          print('Registration failed');
+        }
+      }
+    }
   }
 
   @override
@@ -203,6 +228,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         const Text('Sudah Punya Akun? '),
                                         InkWell(
                                           onTap: () {
+                                            Navigator.pop(context);
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(

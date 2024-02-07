@@ -7,8 +7,12 @@ class Wisata {
   late List<String> imageUrls;
 
   bool isFavorite;
+  bool isGood;
+  bool isBad;
   double rating;
   int views;
+  int goodCounts;
+  int badCounts;
 
   Wisata({
     required this.kategori,
@@ -19,6 +23,10 @@ class Wisata {
     this.isFavorite = false,
     this.rating = 0,
     this.views = 0,
+    this.goodCounts = 0,
+    this.badCounts = 0,
+    this.isGood = false,
+    this.isBad = false,
     this.imageUrls = const [],
   });
 }
