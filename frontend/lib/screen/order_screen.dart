@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
@@ -10,6 +11,11 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
+  String _namaDestinasi = 'Punti Kayu';
+  String _namaKotaDestinasi = 'Palembang';
+  double _rating = 4.5;
+  String _dropDownValue = 'Disc hingga 20%';
+  var _menuItems = ['Disc hingga 20%', '2', '3'];
   int jumlahOrangDewasa = 0;
   int jumlahOrangAnak = 0;
   int hargaDewasa = 25000;
@@ -17,8 +23,6 @@ class _OrderScreenState extends State<OrderScreen> {
   int totalHargaDewasa = 0;
   int totalHargaAnak = 0;
   int totalHarga = 0;
-  String _dropDownValue = 'Disc hingga 20%';
-  var _menuItems = ['Disc hingga 20%', '2', '3'];
 
   DateTime _focusedDay = DateTime.now();
   final ValueNotifier<DateTime> _focusedDayNotifier = ValueNotifier<DateTime>(DateTime.now());
@@ -184,7 +188,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           ),
 
                           const Expanded(
-                              child: const SizedBox()
+                              child: SizedBox()
                           ),
 
                           Container(
@@ -311,7 +315,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 ),
 
                 const Expanded(
-                    child: const SizedBox()
+                    child: SizedBox()
                 ),
 
                 Container(
@@ -355,7 +359,7 @@ class _OrderScreenState extends State<OrderScreen> {
           children: [
             // TODO: 1. Buat tulisan Tiket
             const Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
               child: Text(
                   'Tiket',
                   style: TextStyle(
@@ -386,11 +390,56 @@ class _OrderScreenState extends State<OrderScreen> {
                     )
                   ]
                 ),
-                child: const Row(
+                padding: EdgeInsets.all(5),
+                child: Row(
                   children: [
-                    SizedBox(height: 50,),
+                    const SizedBox(
+                        height: 100,
+                        width: 80,
+                    ),
 
-                    Text('Punti Kayu')
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                            _namaDestinasi,
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF4280BD)
+                            ),
+                        ),
+                        Text(
+                            _namaKotaDestinasi,
+                            style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF4280BD)
+                            ),
+                        ),
+                        RatingBar(
+                            ratingWidget: RatingWidget(
+                              full: const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              half: const Icon(
+                                Icons.star_half,
+                                color: Colors.amber,
+                              ),
+                              empty: const Icon(
+                                Icons.star_border,
+                                color: Colors.amber,
+                              )
+                            ),
+                            onRatingUpdate: (_) {},
+                            allowHalfRating: true,
+                            initialRating: _rating,
+                            ignoreGestures: true,
+                            itemSize: 15,
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -567,7 +616,7 @@ class _OrderScreenState extends State<OrderScreen> {
                             const SizedBox(height: 5),
                   
                             Container(
-                              height: 80,
+                              height: 65,
                               decoration: const BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -640,7 +689,7 @@ class _OrderScreenState extends State<OrderScreen> {
                             const SizedBox(height: 10),
 
                             Container(
-                              height: 80,
+                              height: 65,
                               decoration: const BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.all(Radius.circular(15)),
