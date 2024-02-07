@@ -17,6 +17,9 @@ class _OrderScreenState extends State<OrderScreen> {
   int totalHargaDewasa = 0;
   int totalHargaAnak = 0;
   int totalHarga = 0;
+  String _dropDownValue = 'Disc hingga 20%';
+  var _menuItems = ['Disc hingga 20%', '2', '3'];
+
   DateTime _focusedDay = DateTime.now();
   final ValueNotifier<DateTime> _focusedDayNotifier = ValueNotifier<DateTime>(DateTime.now());
   DateTime? _rangeStart = DateTime.now();
@@ -25,6 +28,8 @@ class _OrderScreenState extends State<OrderScreen> {
   final ValueNotifier<DateTime?> _rangeEndNotifier = ValueNotifier<DateTime?>(null);
   int _year = DateTime.now().year;
   final ValueNotifier<int> _yearNotifier = ValueNotifier<int>(DateTime.now().year);
+
+
 
   void kurangOrangDewasa() {
     setState(() {
@@ -355,7 +360,8 @@ class _OrderScreenState extends State<OrderScreen> {
                   'Tiket',
                   style: TextStyle(
                     color: Colors.orangeAccent,
-                    fontSize: 30
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500
                   )
               ),
             ),
@@ -504,15 +510,34 @@ class _OrderScreenState extends State<OrderScreen> {
                             ),
 
                             Expanded(
-                              flex: 2,
+                              flex: 3,
                               child: Container(
                                 width: double.infinity,
+                                height: 25,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10)
                                 ),
-                                child: Text('Test'),
-
+                                child: DropdownButton(
+                                  items: _menuItems.map((String item) {
+                                    return DropdownMenuItem(
+                                      value: item,
+                                      child: Text(item),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue){
+                                    setState(() {
+                                      _dropDownValue = newValue!;
+                                    });
+                                  },
+                                  value: _dropDownValue,
+                                  style: const TextStyle(
+                                      color: Color(0xFF4280BD),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15
+                                  ),
+                                  isExpanded: true,
+                                )
                               ),
                             )
                           ],
