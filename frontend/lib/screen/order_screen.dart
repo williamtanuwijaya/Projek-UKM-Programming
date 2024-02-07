@@ -19,12 +19,10 @@ class _OrderScreenState extends State<OrderScreen> {
   int totalHarga = 0;
   DateTime _focusedDay = DateTime.now();
   final ValueNotifier<DateTime> _focusedDayNotifier = ValueNotifier<DateTime>(DateTime.now());
-  // DateTime? _selectedDate;
-  DateTime? _rangeStart;
+  DateTime? _rangeStart = DateTime.now();
   DateTime? _rangeEnd;
   final ValueNotifier<DateTime?> _rangeStartNotifier = ValueNotifier<DateTime?>(null);
   final ValueNotifier<DateTime?> _rangeEndNotifier = ValueNotifier<DateTime?>(null);
-  // final ValueNotifier<DateTime> _selectedDateNotifier = ValueNotifier(DateTime.now());
   int _year = DateTime.now().year;
   final ValueNotifier<int> _yearNotifier = ValueNotifier<int>(DateTime.now().year);
 
@@ -64,14 +62,6 @@ class _OrderScreenState extends State<OrderScreen> {
     });
   }
 
-  // void _onDaySelected(DateTime day, DateTime focusedDay) {
-  //   setState(() {
-  //     _selectedDate = day;
-  //     _focusedDay = focusedDay;
-  //     print('selected = $_selectedDate');
-  //   });
-  // }
-
   void _updateFocusedDay(DateTime focusedDay) {
     setState(() {
       _focusedDay = focusedDay;
@@ -81,16 +71,11 @@ class _OrderScreenState extends State<OrderScreen> {
 
   void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
     setState(() {
-      // _selectedDate = null;
       _focusedDay = focusedDay;
       _rangeStart = start;
       _rangeEnd = end;
       _rangeStartNotifier.value = _rangeStart;
       _rangeEndNotifier.value = _rangeEnd;
-
-      print(_focusedDay);
-      print(_rangeStart);
-      print(_rangeEnd);
     });
   }
 
@@ -113,7 +98,6 @@ class _OrderScreenState extends State<OrderScreen> {
                         color: Colors.white,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(40))
                       ),
-                      height: 900,
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       padding: const EdgeInsets.fromLTRB(20, 30, 20, 30),
                       child: Column(
@@ -157,6 +141,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                   Icons.chevron_right,
                                   color: const Color(0xFF4280BD)
                               ),
+                              headerPadding: EdgeInsets.all(0)
                             ),
                             calendarStyle: const CalendarStyle(
                               isTodayHighlighted: false,
@@ -184,7 +169,7 @@ class _OrderScreenState extends State<OrderScreen> {
                               ),
                               weekendTextStyle: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            rowHeight: 35,
+                            rowHeight: 30,
                             availableGestures: AvailableGestures.all,
                             rangeSelectionMode: RangeSelectionMode.toggledOn,
                             rangeStartDay: _rangeStart,
@@ -288,12 +273,12 @@ class _OrderScreenState extends State<OrderScreen> {
                                     },
                                     icon: const Icon(
                                       Icons.chevron_left,
-                                      color: const Color(0xFF4280BD)
+                                      color: Color(0xFF4280BD)
                                     )
                                   ),
                                   Text(
                                     '$_year',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.orangeAccent,
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold
@@ -306,12 +291,12 @@ class _OrderScreenState extends State<OrderScreen> {
                                       },
                                       icon: const Icon(
                                           Icons.chevron_right,
-                                          color: const Color(0xFF4280BD)
+                                          color: Color(0xFF4280BD)
                                       )
                                   ),
                                 ],
                               ),
-                              MonthCalendar(year: _year, updateFocusedDay: _updateFocusedDay, focusedDay: _focusedDay,)
+                              MonthCalendar(year: _year, updateFocusedDay: _updateFocusedDay, focusedDay: _rangeStart!,)
                             ],
                           );
                         }
@@ -465,16 +450,28 @@ class _OrderScreenState extends State<OrderScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('Tanggal'),
-                                    // Text('${DateFormat('dd MMMM yyyy', 'id_ID').format(_selectedDate.toLocal())}')
+                                    const Text(
+                                      'TANGGAL',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: Color(0xFF4280BD)
+                                      ),
+                                    ),
+                                    Text((_rangeStart == null)? DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.now().toLocal()) :
+                                    (_rangeEnd == null)? DateFormat('dd MMMM yyyy', 'id_ID').format(_rangeStart!.toLocal()) :
+                                    '${DateFormat('dd MMMM yyyy', 'id_ID').format(_rangeStart!.toLocal())} - ${DateFormat('dd MMMM yyyy', 'id_ID').format(_rangeEnd!.toLocal())}',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
                               Padding(
                                 padding: EdgeInsets.all(12.0),
                                 child: IconButton(
-                                    icon: Icon(Icons.edit_calendar_rounded),
-                                    color: Color(0xFF4280BD),
+                                    icon: const Icon(Icons.edit_calendar_rounded),
+                                    color: const Color(0xFF4280BD),
                                     onPressed: () => _selectDate(context),
                                 ),
                               ),
@@ -505,7 +502,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                   ),
                               ),
                             ),
-                  
+
                             Expanded(
                               flex: 2,
                               child: Container(
@@ -515,6 +512,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                   borderRadius: BorderRadius.circular(10)
                                 ),
                                 child: Text('Test'),
+
                               ),
                             )
                           ],
@@ -563,9 +561,26 @@ class _OrderScreenState extends State<OrderScreen> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text('Dewasa'),
-                                        Text('$jumlahOrangDewasa'),
-                                        Text('IDR $hargaDewasa')
+                                        const Text(
+                                          'DEWASA',
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color(0xFF4280BD),
+                                          ),
+                                        ),
+                                        Text(
+                                          '$jumlahOrangDewasa',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        Text(
+                                          'IDR $hargaDewasa',
+                                          style: const TextStyle(
+                                              color: Colors.orangeAccent,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),
@@ -619,9 +634,26 @@ class _OrderScreenState extends State<OrderScreen> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        const Text('Anak'),
-                                        Text('$jumlahOrangAnak'),
-                                        Text('IDR $hargaAnak')
+                                        const Text(
+                                          'ANAK',
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color(0xFF4280BD),
+                                          ),
+                                        ),
+                                        Text(
+                                          '$jumlahOrangAnak',
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                        Text(
+                                          'IDR $hargaAnak',
+                                          style: const TextStyle(
+                                              color: Colors.orangeAccent,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),
@@ -691,7 +723,14 @@ class _OrderScreenState extends State<OrderScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
 
-                                    const Text('Harga'),
+                                    const Text(
+                                        'Harga',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black54
+                                      ),
+                                    ),
 
                                     const Divider(
                                       color: Color(0xFF4280BD),
@@ -716,32 +755,64 @@ class _OrderScreenState extends State<OrderScreen> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Text('Voucher'),
-                                        Text('IDR 50'),
+                                        const Text(
+                                          'Voucher',
+                                          style: TextStyle(color: Colors.orangeAccent),
+                                        ),
+                                        Text(
+                                          'IDR 50',
+                                          style: TextStyle(color: Colors.orangeAccent),
+                                        ),
                                       ],
                                     ),
 
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('Total Harga'),
-                                        Text('IDR $totalHarga'),
+                                        const Text(
+                                          'Total Harga',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w900
+                                          ),
+                                        ),
+                                        Text(
+                                          'IDR $totalHarga',
+                                          style: const TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w900,
+                                              color: Color(0xFF4280BD)
+                                          ),
+                                        ),
                                       ],
                                     ),
 
+                                    Expanded(child: SizedBox()),
+
                                     Container(
-                                      width: double.infinity,
-                                      child: ElevatedButton(
-                                          style: ButtonStyle(
-                                            backgroundColor: MaterialStateProperty.resolveWith((states) => Color(0xFF4280BD))
-                                          ),
-                                          onPressed: () => _selectMonth(context),
-                                          child: const Text(
-                                              'Pesan Sekarang',
-                                              style: TextStyle(color: Colors.white)
+                                      height: 45,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xFF4280BD),
+                                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey,
+                                              spreadRadius: 1,
+                                              blurRadius: 5,
+                                              offset: Offset(0, 2)
                                           )
+                                        ]
                                       ),
-                                    )
+                                      alignment: Alignment.center,
+                                      child: const Text(
+                                        'Pesan Sekarang',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -862,7 +933,7 @@ class _MonthCalendarState extends State<MonthCalendar> {
         }
       },
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.25,
+        width: 100,
         height: MediaQuery.of(context).size.height * 0.05,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.025),
