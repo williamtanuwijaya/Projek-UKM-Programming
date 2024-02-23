@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:ukm_project/screen/favorite_screen.dart';
 import 'package:ukm_project/screen/home_screen.dart';
 import 'package:ukm_project/screen/order_screen.dart';
@@ -7,6 +8,7 @@ import 'package:ukm_project/screen/sign_in.dart';
 import 'package:ukm_project/screen/sign_up.dart';
 
 void main() {
+  initializeDateFormatting('id_ID', null);
   runApp(const MainApp());
 }
 
