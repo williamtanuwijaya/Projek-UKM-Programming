@@ -30,6 +30,14 @@ module.exports = {
         type: Sequelize.STRING(255),
         allowNull: false,
       },
+      filename: {
+        type: Sequelize.STRING(255),
+        allowNull: true
+      },
+      path: {
+        type: Sequelize.STRING(255),
+        allowNull: true
+      },
       reset_token: {
         type: Sequelize.STRING(255),
         allowNull: false,

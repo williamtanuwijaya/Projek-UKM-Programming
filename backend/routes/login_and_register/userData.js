@@ -1,7 +1,22 @@
 let express = require('express');
 let router = express.Router();
+let path = require('path');
 const { queryDb } = require('../../database/connectedDatabase');
 const bcrypt = require('bcrypt');
+const multer  = require('multer');
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, __dirname + '/uploads')
+  },
+  filename: function (req, file, cb) {
+    // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.originalname)
+  }
+});
+
+const upload = multer({ storage: storage });
 
 router.get('/', async (req, res) => {
   try {
@@ -77,6 +92,63 @@ router.patch("/:userId", async (req, res) => {
         await queryDb(updateUserQuery, [name, userId]);
       }
       res.status(200).json({ message: 'User updated successfully' });
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    } 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+//PATCH route to add/update profile picture to user
+// router.patch("/foto/:userId", async (req, res) => {
+//   try {
+//     const userId = req.params.userId;
+//     const { filename, path } = req.body;
+//     const host = req.host;
+//     const filePath = req.protocol + "://" + host + '/' + req.file.path;
+      
+//     if (userId) {
+//       if (req.body.filename) {
+//         const updateUserQuery = 'UPDATE users SET filename = ? WHERE id = ?';
+//         await queryDb(updateUserQuery, [filename, userId]);
+//       }
+//       if (req.body.path) {
+//         const updateUserQuery = 'UPDATE users SET path = ? WHERE id = ?';
+//         await queryDb(updateUserQuery, [path, userId]);
+//       }
+//       res.status(200).json({ message: 'profile picture updated successfully' });
+//     } else {
+//       res.status(404).json({ error: 'User not found' });
+//     } 
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// });
+
+//POST route to upload photo using multer
+router.post('/profile/:userId', upload.single('avatar'), async (req, res) => {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+  try {
+    const userId = req.params.userId;
+    const filename = req.file.originalname;
+    const path = req.file.destination;
+    // const host = req.host;
+    // const filePath = req.protocol + "://" + host + '/' + req.file.path;
+      
+    if (userId) {
+      if (req.body.filename) {
+        const updateUserQuery = 'UPDATE users SET filename = ? WHERE id = ?';
+        await queryDb(updateUserQuery, [filename, userId]);
+      }
+      if (req.body.path) {
+        const updateUserQuery = 'UPDATE users SET path = ? WHERE id = ?';
+        await queryDb(updateUserQuery, [path, userId]);
+      }
+      res.status(200).json({ message: 'profile picture updated successfully' });
     } else {
       res.status(404).json({ error: 'User not found' });
     } 

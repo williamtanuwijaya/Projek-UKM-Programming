@@ -14,9 +14,7 @@ let forgotPasswordRouter = require('./routes/login_and_register/forgotPassword')
 let resetPasswordRouter = require('./routes/login_and_register/resetPassword');
 let userDataRouter = require('./routes/login_and_register/userData');
 let app = express();
-let cors = require('cors');
 
-app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -27,7 +25,7 @@ databaseConnect();
 
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
-// app.use('/products', productsRouter);
+app.use('/products', productsRouter);
 app.use('/api/register', registerRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/forgot-password', forgotPasswordRouter);

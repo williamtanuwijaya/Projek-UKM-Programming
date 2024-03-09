@@ -1,0 +1,72 @@
+[
+  {
+    "kategori": "wisata air",
+    "nama": "Amanzi Waterpark",
+    "deskripsi": "lorem",
+    "namaKota": "Palembang",
+    "imageTitleUrl": "https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/02/07/b414132c-b072-434e-a2a7-ffd7d6212c12-1675703701334-545c31eec8eae9fd8114ce10d4bea06e.jpg"
+  },
+  {
+    "kategori": "wisata sejarah",
+    "nama": "Monpera",
+    "deskripsi": "lorem ipsum",
+    "namaKota": "Palembang",
+    "imageTitleUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/6f/16/47/monumen.jpg?w=1200&h=-1&s=1"
+  },
+  {
+    "kategori": "wisata heritage",
+    "nama": "Jembatan Ampera",
+    "deskripsi": "lorem ipsum",
+    "namaKota": "Palembang",
+    "imageTitleUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/a8/7a/36/ampera-bridge-at-night.jpg?w=1000&h=-1&s=1"
+  },
+  {
+    "kategori": "wisata bahari",
+    "nama": "Pulau Kemaro",
+    "deskripsi": "lorem ipsum",
+    "namaKota": "Palembang",
+    "imageTitleUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/57/f5/57/img-20160410-084357-largejpg.jpg?w=1200&h=-1&s=1"
+  },
+  {
+    "kategori": "wisata sejarah",
+    "nama": "Masjid Agung Palembang",
+    "deskripsi": "lorem ipsum",
+    "namaKota": "Palembang",
+    "imageTitleUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/b9/85/a6/masjid-agung-palembang.jpg?w=1200&h=-1&s=1"
+  },
+  {
+    "kategori": "wisata belanja",
+    "nama": "Palembang Icon",
+    "deskripsi": "lorem ipsum",
+    "namaKota": "Palembang",
+    "imageTitleUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/d1/2d/9e/palembang-icon.jpg?w=1100&h=-1&s=1"
+  },
+  {
+    "kategori": "wisata pendidikan",
+    "nama": "G Art Studio",
+    "deskripsi": "lorem ipsum",
+    "namaKota": "Palembang",
+    "imageTitleUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/b5/e8/1e/photo0jpg.jpg?w=1200&h=-1&s=1"
+  },
+  {
+    "kategori": "wisata sejarah",
+    "nama": "Baba Ong Boen Tjit House",
+    "deskripsi": "lorem ipsum",
+    "namaKota": "Palembang",
+    "imageTitleUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/48/89/19/baba-ong-boen-tjit-house.jpg?w=1200&h=-1&s=1"
+  },
+  {
+    "kategori": "wisata sejarah",
+    "nama": "Museum Balaputradewa",
+    "deskripsi": "lorem ipsum",
+    "namaKota": "Palembang",
+    "imageTitleUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/07/10/03/museum-balaputradewa.jpg?w=1200&h=-1&s=1"
+  },
+  {
+    "kategori": "wisata heritage",
+    "nama": "Al-Qur'an Al-Akbar",
+    "deskripsi": "lorem ipsum",
+    "namaKota": "Palembang",
+    "imageTitleUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/10/00/6d/al-quran-al-akbar.jpg?w=1200&h=-1&s=1"
+  },
+]

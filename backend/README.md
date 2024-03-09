@@ -23,6 +23,7 @@ Kami menggunakan backendnya yaitu ExpressJS yang bertujuan untuk membuat RESTFUL
 | `/api/data-user/:userId` | `GET` | Menampilkan semua data user berdasarkan id |
 | `/api/data-user/:userId` | `DELETE` | Menghapus data user berdasarkan id |
 | `/api/data-user/:userId` | `PATCH` | Mengupdate salah satu / beberapa data user yang terdiri dari (email, username, phone, name, confirmPasswod) berdasarkan id |
+| `/api/data-user/profile/:userId` | `POST` | Mengupload file foto profil user dan mengupdate path foto profil, dan nama file foto profil user berdasarkan id (not tested yet) |
 
 ## Documentation
 
@@ -48,3 +49,4 @@ Start the server
 ## Authors
 
 - [William Tanuwijaya](https://www.github.com/williamtanuwijaya)
+- [Michael Wijaya](https://github.com/Daemondollar)

@@ -5,6 +5,8 @@ const Validator = require('fastest-validator');
 const { Product } = require('../models');
 
 const v = new Validator();
+// maybe Op not needed
+const { Op } = require("sequelize"); 
 
 router.get('/', async (req, res) => {
   const products = await Product.findAll();
@@ -74,4 +76,23 @@ router.delete('/:id', async (req, res) => {
   });
 });
 
+//search products based on name given
+router.get('/search/:name?', async (req, res) => {
+  let name = "-";
+  if(req.params.name) {
+    name = req.params.name;
+  }
+  
+  const products = await Product.findAll({
+    where: {
+      [Op.or]: [
+        { name: { [Op.substring]: name } },
+        { brand: { [Op.substring]: name } }
+      ]
+    }
+  });
+  res.json(products || {});
+});
+
 module.exports = router;
+ 

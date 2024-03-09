@@ -5,8 +5,8 @@ describe('API Tests', () => {
   // Test the registration route
   it('should register a new user', async () => {
     const res = await request(app).post('/api/register').send({
-      email: 'test@example.com',
-      username: 'testuser',
+      email: 'test5@example.com',
+      username: 'tes5tuser',
       password: 'testpassword',
       phone: '123456789',
       name: 'Test User',
