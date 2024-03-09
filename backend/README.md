@@ -38,6 +38,11 @@ Install dependencies
 ```bash
   npm install
 ```
+Migrate table and column to database
+
+```bash
+  npx sequelize db:migrate
+```
 
 Start the server
 
