@@ -41,7 +41,7 @@ Install dependencies
 Migrate table and column to database
 
 ```bash
-  npx sequelize db:migrate
+  npx sequelize db:migrate 
 ```
 
 Start the server
