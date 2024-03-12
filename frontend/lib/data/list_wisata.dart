@@ -37,16 +37,6 @@ var listWisata = [
         'https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/02/07/b414132c-b072-434e-a2a7-ffd7d6212c12-1675703701334-545c31eec8eae9fd8114ce10d4bea06e.jpg',
       ]),
   Wisata(
-      kategori: 'wahana',
-      nama: 'Trans Studio Bandung',
-      deskripsi: 'lorem',
-      namaKota: 'Bandung',
-      imageTitleUrl:
-          'https://blog-images.reddoorz.com/uploads/image/file/1854/trans-studi-bandung.jpg',
-      imageUrls: [
-        'https://blog-images.reddoorz.com/uploads/image/file/1854/trans-studi-bandung.jpg',
-      ]),
-  Wisata(
       kategori: 'budaya',
       nama: 'Candi Borobudur',
       deskripsi: 'lorem',
